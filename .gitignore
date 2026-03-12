@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+.env
+
+# Storage & Temp
+temp_uploads/
+chroma_db/
+*.log
+
+# Node / React
+node_modules/
+dist/
+dist-ssr/
+*.local
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db

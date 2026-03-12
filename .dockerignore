@@ -1,0 +1,13 @@
+# .dockerignore
+.venv
+__pycache__
+node_modules
+.git
+.env
+backend/data/chroma/*
+backend/data/uploads/*
+backend/data/summaries/*
+frontend/dist
+*.pyc
+*.pyo
+.DS_Store

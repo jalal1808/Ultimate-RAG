@@ -1,0 +1,22 @@
+# backend.Dockerfile
+FROM python:3.12-slim
+
+# Install system dependencies for build-time (if any)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+# Copy requirements first to leverage Docker cache
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the rest of the application
+COPY . .
+
+# Ensure data directories exist
+RUN mkdir -p backend/data/uploads backend/data/chroma backend/data/summaries
+
+# Run the application
+CMD ["uvicorn", "backend.main:app", "--host", "0.0.0.0", "--port", "8000"]
