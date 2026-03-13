@@ -1,4 +1,4 @@
-# backend.Dockerfile
+# Dockerfile for UltimateRAG Backend
 FROM python:3.12-slim
 
 # Install system dependencies for build-time (if any)
