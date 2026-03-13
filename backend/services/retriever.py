@@ -3,21 +3,26 @@ from backend.config import get_settings
 
 
 def retrieve_chunks(
-    file_id: str,
     query_embedding: list[float],
+    file_id: str | None = None,
     top_k: int | None = None,
 ) -> list[dict]:
     """
     Query Chroma for top_k similar chunks.
+    If file_id is provided, scopes search to that file.
+    If file_id is None, searches across all documents.
     Returns list of dicts: {chunk_id, text, metadata, distance}
     """
     settings = get_settings()
     top_k = top_k or settings.TOP_K_RETRIEVAL
 
+    # Build optional metadata filter
+    where = {"file_id": file_id} if file_id else None
+
     results = chroma_store.query_collection(
-        file_id=file_id,
         query_embedding=query_embedding,
         top_k=top_k,
+        where=where,
     )
 
     if not results:

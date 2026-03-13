@@ -1,8 +1,18 @@
 import uuid
+import hashlib
 import aiofiles
 from pathlib import Path
 from fastapi import UploadFile
 from backend.config import get_settings
+
+
+def compute_file_hash(file_path: Path) -> str:
+    """Compute SHA-256 hash of a file for deduplication"""
+    sha256 = hashlib.sha256()
+    with open(file_path, "rb") as f:
+        for block in iter(lambda: f.read(8192), b""):
+            sha256.update(block)
+    return sha256.hexdigest()
 
 
 async def save_upload(file: UploadFile) -> tuple[str, Path]:
