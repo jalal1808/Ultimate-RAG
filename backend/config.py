@@ -4,10 +4,10 @@ from functools import lru_cache
 
 class Settings(BaseSettings):
     BASE_DIR: Path = Path(__file__).parent
-    DATA_DIR: Path = BASE_DIR / "data"
-    UPLOAD_DIR: Path = DATA_DIR / "uploads"
-    CHROMA_DIR: Path = DATA_DIR / "chroma"
-    SUMMARY_DIR: Path = DATA_DIR / "summaries"
+DATA_DIR: Path = Path("data")
+UPLOAD_DIR: Path = DATA_DIR / "uploads"
+CHROMA_DIR: Path = DATA_DIR / "chroma"
+SUMMARY_DIR: Path = DATA_DIR / "summaries"
 
     EMBEDDING_PROVIDER: str = "local"
     EMBEDDING_MODEL: str = "all-MiniLM-L6-v2"
